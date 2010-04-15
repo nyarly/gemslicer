@@ -1,0 +1,10 @@
+*~
+*.swp
+.DS_Store
+server/
+pkg/
+log/*
+tmp/*
+.bundle/
+bin/
+*.gemspec
