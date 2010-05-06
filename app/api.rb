@@ -8,7 +8,7 @@ module Gemslicer
     enable :logging
     
     post "/api/v1/gems" do
-      slicer = Slicer.new(request.body)
+      slicer = Slicer.new(Gemslicer::ServerRoot, request.body)
       slicer.process      
       status(slicer.code)
       body(slicer.message)

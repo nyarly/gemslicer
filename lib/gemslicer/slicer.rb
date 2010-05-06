@@ -2,6 +2,9 @@ require 'rubygems/format'
 require 'rubygems/indexer'
 
 module Gemslicer
+  ServerRoot = "gem_server".freeze
+  ProxyServerRoot = "gem_proxy_server".freeze
+  
   class Slicer
     include Vault::FS
     
@@ -11,16 +14,17 @@ module Gemslicer
       File.expand_path(File.join(File.dirname(__FILE__), '..', '..', *more))
     end
     
-    def self.indexer
+    def self.indexer(server_root)
       @indexer ||= 
         begin
-          indexer = Gem::Indexer.new(Gemslicer.server_path, :build_legacy => false)
+          indexer = Gem::Indexer.new(Gemslicer.server_path(server_root), :build_legacy => false)
           def indexer.say(message) end
           indexer
         end
     end
     
-    def initialize(body)
+    def initialize(server_root, body)
+      @server_root = server_root
       @body = StringIO.new(body.read)
     end
     
@@ -45,7 +49,7 @@ module Gemslicer
         format = Gem::Format.from_io(body)
         @spec = format.spec
       rescue Exception => e
-        notify("RubyGems cannot process this gem.\n" +
+        notify("Gemslicer cannot process this gem.\n" +
                "Please try rebuilding it and installing it locally to make sure it's valid.\n" +
                "Error:\n#{e.message}\n#{e.backtrace.join("\n")}", 422)
       end
@@ -59,7 +63,7 @@ module Gemslicer
     
     def update_index
       log "Updating the index"
-      self.class.indexer.generate_index
+      self.class.indexer(@server_root).generate_index
       log "Finished updating the index"   
     rescue => e
       log "Error updating the index: #{e.message}"
