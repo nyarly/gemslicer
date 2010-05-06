@@ -8,7 +8,7 @@ module Gemslicer
     attr_reader :spec, :message, :code, :body
     
     def self.server_path(*more)
-      File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'server', *more))
+      File.expand_path(File.join(File.dirname(__FILE__), '..', '..', *more))
     end
     
     def self.indexer
