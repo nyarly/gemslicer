@@ -20,9 +20,8 @@ module Gemslicer
         end
     end
     
-    def initialize(body, host_with_port=nil)
+    def initialize(body)
       @body = StringIO.new(body.read)
-      @host_with_port = host_with_port
     end
     
     def process
