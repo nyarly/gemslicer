@@ -13,10 +13,10 @@ begin
     gem.authors = ["Jeremy Burks"]
     
     gem.files = %w(LICENSE README.rdoc Rakefile) + Dir.glob("{app,lib,spec,features}/**/*")
-    
-    gem.add_dependency 'sinatra', '>= 1.0'
+
+    gem.add_dependency "builder"
+    gem.add_dependency "sinatra', '>= 1.0"    
     gem.add_development_dependency "rspec", ">= 1.3"   
-    gem.add_development_dependency "cucumber", ">= 0.6"      
 
     desc "Install development dependencies."
     task :install_dependencies do
