@@ -1,9 +1,13 @@
 require 'sinatra/base'
 
 class Gemslicer::Hostess < Sinatra::Base
+  configure do
+    Gemslicer.ensure_server_paths_exist
+  end
+  
   def serve
-    server_root = env['gemslicer.server_root'] || Gemslicer::ServerRoot
-    send_file(Gemslicer.server_path(server_root, request.path_info))
+    send_file env['gemslicer.server_path'] ||
+              Gemslicer.server_path(request.path_info)
   end
 
   %w[/specs.4.8.gz
