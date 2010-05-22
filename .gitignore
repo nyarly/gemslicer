@@ -1,8 +1,7 @@
 *~
 *.swp
 .DS_Store
-gem_server/
-gem_proxy_server/
+server/
 pkg/
 log/*
 tmp/*
