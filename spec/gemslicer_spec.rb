@@ -22,4 +22,19 @@ describe Gemslicer do
       Gemslicer.server_path('bar', 'car').should == '/dev/foo/bar/car'
     end
   end
+
+  context ".proxy_server_path" do
+    before(:each) do
+      Gemslicer.server_root = '/dev/foo'
+    end
+    
+    it "should be rooted under server_root" do
+      Gemslicer.proxy_server_path.should =~ /\A\/dev\/foo/
+    end
+
+    it "should be 'proxy_tmp'" do
+      Gemslicer.proxy_server_path.should =~ /\/proxy_tmp\Z/
+    end
+    
+  end
 end
