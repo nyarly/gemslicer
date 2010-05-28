@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'spec/rake/spectask'
 
 begin
   require 'jeweler'
@@ -15,8 +14,11 @@ begin
     gem.files = %w(LICENSE README.rdoc Rakefile) + Dir.glob("{app,lib,spec,features}/**/*")
 
     gem.add_dependency "builder"
-    gem.add_dependency "sinatra', '>= 1.0"    
-    gem.add_development_dependency "rspec", ">= 1.3"   
+    gem.add_dependency "sinatra", "~> 1.0"
+    gem.add_development_dependency "cucumber", "~> 0.7"
+    gem.add_development_dependency "rack-test"
+    gem.add_development_dependency "rspec", "~> 1.3" 
+    gem.add_development_dependency "sham_rack"
 
     desc "Install development dependencies."
     task :install_dependencies do
@@ -28,14 +30,13 @@ begin
         end
       end
     end
-  end
-  
+  end  
   Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
-desc "Run the examples"
+require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new do |t|
   t.spec_files = ["spec/**/*_spec.rb"]
   t.spec_opts = %w[--color --format specdoc --diff]  
