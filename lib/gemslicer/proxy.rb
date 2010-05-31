@@ -8,11 +8,7 @@ module Gemslicer
     
       set :upstream, "http://rubygems.org"
       set :upstream_redirects_max, 3
-    
-      configure do      
-        Gemslicer.ensure_proxy_server_paths_exist
-      end
-    
+        
       %w[/specs.4.8.gz
          /latest_specs.4.8.gz
          /prerelease_specs.4.8.gz

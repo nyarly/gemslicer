@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "gemslicer"
+
+Gemslicer::Proxy.run! Gemslicer::Options.new("gemslicer-proxy").parse!(ARGV.dup)

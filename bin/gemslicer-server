@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby  
+
+require "gemslicer"
+
+Gemslicer::Api.run! Gemslicer::Options.new("gemslicer-server").parse!(ARGV.dup)
+
