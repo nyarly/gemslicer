@@ -1,9 +1,8 @@
-require 'gemslicer'
-require 'hostess'
+require "gemslicer/hostess"
 
 module Gemslicer
   class Api < Sinatra::Base
-    use Gemslicer::Hostess
+    use Hostess
     
     enable :logging
     

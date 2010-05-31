@@ -3,6 +3,10 @@ require 'gemslicer/vault'
 require 'gemslicer/slicer'
 
 module Gemslicer
+
+  autoload :Api, "gemslicer/api"
+  autoload :Proxy, "gemslicer/proxy"
+
   extend self
   
   def server_root=(root)
