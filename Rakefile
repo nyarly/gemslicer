@@ -15,7 +15,6 @@ begin
 
     gem.add_dependency "builder"
     gem.add_dependency "sinatra", "~> 1.0"
-    gem.add_development_dependency "cucumber", "~> 0.7"
     gem.add_development_dependency "rack-test"
     gem.add_development_dependency "rspec", "~> 1.3" 
     gem.add_development_dependency "sham_rack"
@@ -47,14 +46,6 @@ begin
     spec.libs << 'lib' << 'spec'
     spec.pattern = 'spec/**/*_spec.rb'
     spec.rcov = true
-  end
-rescue LoadError
-end
-
-begin
-  require 'cucumber/rake/task'
-  Cucumber::Rake::Task.new(:features) do |t|
-    t.cucumber_opts = "--format pretty"
   end
 rescue LoadError
 end
