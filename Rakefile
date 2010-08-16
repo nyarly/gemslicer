@@ -3,7 +3,7 @@ require 'rubygems'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = 'Gemslicer'
+    gem.name = 'gemslicer'
     gem.summary = 'Minimalist version of Gemcutter.'
     gem.description = "Minimalist version of Gemcutter. Supports 'gem push'."
     gem.has_rdoc = false
