@@ -51,6 +51,6 @@ rescue LoadError
 end
 
 task :spec => :check_dependencies
-task :default => [:spec, :features]
-task :build => [:spec, :features]
+task :default => :spec
+task :build => :spec
 
