@@ -8,8 +8,8 @@ module Gemslicer
     end
     
     def parse!(args)      
-      options = {        
-        :port => 3027,
+      options = {
+        :port => default_port,
         :environment => :production
       }      
       OptionParser.new do |op|
@@ -26,7 +26,7 @@ module Gemslicer
           options[:host] = host
         end
 
-        op.on("-p", "--port PORT", "use PORT (default: 3027)") do |port|
+        op.on("-p", "--port PORT", "use PORT (default: #{default_port})") do |port|
           options[:port] = port
         end
 
@@ -67,6 +67,14 @@ module Gemslicer
       end
             
       options
+    end
+
+    private
+    def default_port
+      case @app
+      when /server/ then 3027
+      when /proxy/ then 3028
+      end
     end
   end
   
