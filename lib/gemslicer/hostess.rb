@@ -7,6 +7,10 @@ module Gemslicer
       send_file env['gemslicer.server_path'] ||
         Gemslicer.server_path(request.path_info)
     end
+
+    get "/" do
+      Gemslicer.server_root
+    end       
     
     %w[/specs.4.8.gz
        /latest_specs.4.8.gz
