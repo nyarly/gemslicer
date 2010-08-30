@@ -6,10 +6,6 @@ module Gemslicer
 
     enable :logging
 
-    get "/" do
-      Gemslicer.server_root
-    end       
-    
     post "/api/v1/gems" do
       slicer = Slicer.new(request.body.read)
       slicer.process      
