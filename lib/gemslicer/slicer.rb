@@ -12,7 +12,13 @@ module Gemslicer
     end
 
     def self.new_indexer(path)
-      indexer = Gem::Indexer.new(path, :build_legacy => false)
+      # BUG: There is a bug in JRuby [1] with regard to renaming files
+      # across devices. Create the tmpdir relative to the server root
+      # to make sure everything is on the same device.
+      #
+      # [1] http://jira.codehaus.org/browse/JRUBY-3381    
+      ENV["TMPDIR"] = FileUtils.mkdir_p File.join(path, 'generate_index_tmp')      
+      indexer = Gem::Indexer.new(path)
       def indexer.say(message) end
       indexer      
     end

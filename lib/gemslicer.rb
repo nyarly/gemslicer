@@ -38,23 +38,12 @@ module Gemslicer
   # directories exists  
   def ensure_server_paths_exist
     return if File.exist? File.join(server_path, "gems")
-    generate_index(server_path)
+    Gemslicer::Slicer.new_indexer(server_path).generate_index 
     FileUtils.mkdir_p File.join(server_path, 'gems')
   end
 
   def ensure_proxy_server_paths_exist
     return if File.exist?(proxy_server_path)
-    generate_index(proxy_server_path)
-  end
-
-  private
-  def generate_index(path)
-    # BUG: There is a bug in JRuby [1] with regard to renaming files
-    # across devices. Create the tmpdir relative to the server root
-    # to make sure everything is on the same device.
-    #
-    # [1] http://jira.codehaus.org/browse/JRUBY-3381    
-    ENV["TMPDIR"] = FileUtils.mkdir_p File.join(path, 'generate_index_tmp')    
-    Gemslicer::Slicer.new_indexer(path).generate_index 
+    Gemslicer::Slicer.new_indexer(proxy_server_path).generate_index 
   end
 end
